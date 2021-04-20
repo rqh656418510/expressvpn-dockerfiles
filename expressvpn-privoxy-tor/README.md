@@ -8,7 +8,7 @@ This container should be used as base layer.
 
 ## Download
 
-`docker pull polkaned/expressvpn`
+`docker pull polkaned/privoxy-tor-expressvpn`
 
 ## Start the container
 
@@ -20,8 +20,11 @@ This container should be used as base layer.
       --privileged \
       --detach=true \
       --tty=true \
+      -p 9050:9050 \
+      -p 9052:9052 \
+      -p 8118:8118 \
       --name=expressvpn \
-      polkaned/expressvpn \
+      polkaned/privoxy-tor-expressvpn \
       /bin/bash
 
 
@@ -32,28 +35,30 @@ In this case all traffic is routed via the vpn container. To reach the other con
   ```
   expressvpn:
     container_name: expressvpn
-    image: polkaned/expressvpn
+    image: polkaned/privoxy-tor-expressvpn:latest
+    privileged: true
+    restart: always
     environment:
       - ACTIVATION_CODE={% your-activation-code %}
       - SERVER={% LOCATION/ALIAS/COUNTRY %}
     cap_add:
       - NET_ADMIN
-    devices: 
+    devices:
       - /dev/net/tun
-    stdin_open: true
-    tty: true
-    command: /bin/bash
-    privileged: true
-    restart: unless-stopped
     ports:
-      # ports of other containers that use the vpn (to access them locally)
-  
-  downloader:
-    image: example/downloader
-    container_name: downloader
-    network_mode: service:expressvpn
-    depends_on:
-      - expressvpn
+      - 9050:9050
+      - 9052:9052
+      - 8118:8118
+    tty: true
+    stdin_open: true
+    command: /bin/bash
+
+   downloader:
+     image: example/downloader
+     container_name: downloader
+     network_mode: service:expressvpn
+     depends_on:
+       - expressvpn
   ```
 
 ## Configuration Reference

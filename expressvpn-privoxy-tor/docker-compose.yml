@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   expressvpn:
-    container_name: privoxy-tor-expressvpn
+    container_name: expressvpn
     image: polkaned/privoxy-tor-expressvpn:latest
     privileged: true
     restart: always
