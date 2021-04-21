@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+service tor start
 service privoxy start
 
 cp /etc/resolv.conf /tmp/resolv.conf
