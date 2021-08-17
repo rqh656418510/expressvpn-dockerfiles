@@ -6,10 +6,6 @@ This container should be used as base layer.
 
 1. Get your activation code from ExpressVPN web site.
 
-## Download
-
-`docker pull polkaned/privoxy-tor-expressvpn`
-
 ## Start the container
 
     docker run \
