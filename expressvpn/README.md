@@ -15,6 +15,8 @@ This container should be used as base layer.
     docker run \
       --env=ACTIVATION_CODE={% your-activation-code %} \
       --env=SERVER={% LOCATION/ALIAS/COUNTRY %} \
+      --env=PREFERRED_PROTOCOL={% protocol %} \
+      --env=LIGHTWAY_CIPHER={% lightway-cipher %} \
       --cap-add=NET_ADMIN \
       --device=/dev/net/tun \
       --privileged \
@@ -36,6 +38,8 @@ In this case all traffic is routed via the vpn container. To reach the other con
     environment:
       - ACTIVATION_CODE={% your-activation-code %}
       - SERVER={% LOCATION/ALIAS/COUNTRY %}
+      - PREFERRED_PROTOCOL={% protocol %}
+      - LIGHTWAY_CIPHER={% lightway-cipher %}
     cap_add:
       - NET_ADMIN
     devices: 
@@ -67,3 +71,13 @@ A mandatory string containing your ExpressVPN activation code.
 A optional string containing the ExpressVPN server LOCATION/ALIAS/COUNTRY. Connect to smart location if it is not set.
 
 `SERVER=ukbe`
+
+### PREFERRED_PROTOCOL
+A optional string containing the ExpressVPN protocol. Can be auto, udp, tcp ,lightway_udp, lightway_tcp. Use auto if it is not set.
+
+`PREFERRED_PROTOCOL=lightway_udp`
+
+### LIGHTWAY_CIPHER
+A optional string containing the ExpressVPN lightway cipher. Can be auto, aes, chacha20. Use auto if it is not set.
+
+`LIGHTWAY_CIPHER=chacha20`

@@ -7,7 +7,10 @@ LABEL maintainer="benjamin@polkaned.net"
 
 ENV ACTIVATION_CODE Code
 ENV LOCATION smart
-ARG APP=expressvpn_3.6.0.70-1_amd64.deb
+ENV PREFERRED_PROTOCOL auto
+ENV LIGHTWAY_CIPHER auto
+
+ARG APP=expressvpn_3.9.0.75-1_amd64.deb
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates wget expect iproute2 curl procps libnm0 \
