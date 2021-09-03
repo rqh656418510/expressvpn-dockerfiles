@@ -8,7 +8,6 @@ LABEL maintainer="benjamin@polkaned.net"
 ENV ACTIVATION_CODE Code
 ENV LOCATION smart
 ARG APP=expressvpn_3.10.0.9-1_amd64.deb
-ARG SPEEDTEST_INSTALL_KEY=379CE192D401AB61
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget curl apt-utils apt-transport-https dirmngr ca-certificates expect iproute2 procps libnm0 gnupg2 tor privoxy \
@@ -24,10 +23,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && sed -i \
         -e 's/listen-address\s*127.0.0.1:8118/listen-address 0.0.0.0:8118/g' \
         /etc/privoxy/config \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ${SPEEDTEST_INSTALL_KEY} \
-    && touch /etc/apt/sources.list.d/speedtest.list \
-    && echo "deb https://ookla.bintray.com/debian generic main" > /etc/apt/sources.list.d/speedtest.list \
-    && apt-get update && apt-get install -y --no-install-recommends speedtest
+    && curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash \
+    && apt-get install speedtest
 
 COPY entrypoint.sh /tmp/entrypoint.sh
 COPY expressvpnActivate.sh /tmp/expressvpnActivate.sh
