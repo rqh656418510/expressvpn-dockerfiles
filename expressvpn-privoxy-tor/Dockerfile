@@ -7,7 +7,7 @@ LABEL maintainer="benjamin@polkaned.net"
 
 ENV ACTIVATION_CODE Code
 ENV LOCATION smart
-ARG APP=expressvpn_3.9.0.75-1_amd64.deb
+ARG APP=expressvpn_3.10.0.9-1_amd64.deb
 ARG SPEEDTEST_INSTALL_KEY=379CE192D401AB61
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
