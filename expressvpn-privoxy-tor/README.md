@@ -9,7 +9,7 @@ This container should be used as base layer.
 ## Build the image
 
 ``` sh
-# docker build --pull --no-cache --rm --force-rm -f Dockerfile -t polkaned/privoxy-tor-expressvpn:latest .
+docker build --pull --no-cache --rm --force-rm -f Dockerfile -t polkaned/privoxy-tor-expressvpn:latest .
 ```
 
 ## Start the container
@@ -78,3 +78,17 @@ A mandatory string containing your ExpressVPN activation code.
 A optional string containing the ExpressVPN server LOCATION/ALIAS/COUNTRY. Connect to smart location if it is not set.
 
 `SERVER=ukbe`
+
+## Test Connection
+
+### Tor
+
+``` sh
+curl --socks5 127.0.0.1:9050 www.google.com
+```
+
+### ExpressVPN
+
+``` sh
+curl -I -x 127.0.0.1:9118 www.google.com
+```
