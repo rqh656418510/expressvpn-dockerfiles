@@ -7,7 +7,7 @@ LABEL maintainer="benjamin@polkaned.net"
 
 ENV ACTIVATION_CODE Code
 ENV LOCATION smart
-ARG APP=expressvpn_3.36.0.2-1_amd64.deb
+ARG APP=expressvpn_3.39.0.8-1_amd64.deb
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget curl apt-utils apt-transport-https dirmngr ca-certificates expect iproute2 procps libnm0 gnupg2 tor privoxy \
